@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap");
+
+/* Global */
+
+* {
+    font-family: "Raleway", sans-serif;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    color: #4a3f35;
+}
+
+body {
+    background-color: #f4f6ff;
+}
+
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    align-items: center;
+    padding: 0 3rem;
+    /*vertical, horizontal*/
+}
+
+header h2 {
+    font-size: 1.7rem;
+    width: 20%;
+}
+
+header h2 span {
+    margin-left: 1rem;
+}
+
+header a {
+    color: #4a3f35;
+    font-weight: 600;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+form.search {
+    width: 980px;
+    background: #fff;
+}
+
+form.search input,
+form.search button {
+    height: 46px;
+    outline: none;
+    border: none;
+}
+
+form.search input {
+    background: none;
+    width: 90%;
+    padding: 0rem 1rem;
+}
+
+form.search button {
+    width: 9.55%;
+    position: relative;
+    background-color: #ffcb74;
+}
+
+
+/* Carousell */
+
+#caroussel {
+    height: 70vh;
+}
+
+.carousell-item {
+    height: 100%;
+    width: 80%;
+    margin-left: 1.3rem;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.crsl {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carousell-item:first-child {
+    background: #ea907a;
+}
+
+.carousell-item:nth-child(2) {
+    background: #ffcb74;
+}
+
+.carousell-item:nth-child(3) {
+    background: #4f8a8b;
+}
+
+.carousell-info {
+    padding: 20px;
+    padding-left: 100px;
+}
+
+.carousell-info h1,
+.carousell-info p {
+    padding-bottom: 10px;
+    width: 70%;
+    text-align: justify;
+}
+
+
+/* Carousell card */
+
+.card-carousell {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    gap: 4rem;
+    justify-items: center;
+    justify-content: center;
+}
+
+.container {
+    margin: 1px 8px;
+}
+
+.card-info {
+    text-align: center;
+}
+
+.card-carousell .container h3,
+.card-carousell .container p {
+    padding: 10px;
+}
