@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../App.css";
+import ProductPage from "./widgets/ProductCard";
 
 class Homepage extends Component {
   render() {
@@ -9,6 +9,7 @@ class Homepage extends Component {
           <header>
             <h2>
               Fruitazon <span className="title-menu" />
+              <span class="ti-menu"></span>
             </h2>
             <nav>
               <form action="{value.toString()}" className="search">
@@ -119,6 +120,7 @@ class Homepage extends Component {
             </div>
           </section>
         </div>
+        <ProductPage />
       </div>
     );
   }

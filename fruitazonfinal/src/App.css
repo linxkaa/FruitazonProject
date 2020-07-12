@@ -85,12 +85,12 @@ form.search button {
     width: 80%;
     margin-left: 1.3rem;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
 }
 
 .crsl {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 55% 45%;
     justify-content: space-between;
     align-items: center;
 }
@@ -108,7 +108,7 @@ form.search button {
 }
 
 .carousell-info {
-    padding: 20px;
+    padding: 2rem;
     padding-left: 100px;
 }
 
@@ -117,6 +117,10 @@ form.search button {
     padding-bottom: 10px;
     width: 70%;
     text-align: justify;
+}
+
+.sistematika-carousell {
+    padding: 100px;
 }
 
 
@@ -144,4 +148,67 @@ form.search button {
 .card-carousell .container h3,
 .card-carousell .container p {
     padding: 10px;
+}
+
+.flickity-prev-next-button.previous {
+    left: 210px;
+}
+
+.flickity-prev-next-button.next {
+    right: 210px;
+}
+
+
+/* product page */
+
+.popular {
+    padding: 2rem 3.5rem;
+    margin-bottom: 5rem;
+}
+
+.popular h2 {
+    margin: 3rem 6rem;
+    color: #6a6b6d;
+}
+
+.single-item {
+    width: 100%;
+    margin-right: 1rem;
+    background: #fff;
+    border-radius: 5px;
+    color: #6a6b6d;
+}
+
+.single-item .img {
+    height: 230px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.single-item .info {
+    padding: 1rem;
+}
+
+.single-item .info h3,
+.single-item .info p {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.item-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price h4 {
+    font-size: 1.3rem;
+    font-family: sans-serif;
+}
+
+.popular-carousel {
+    padding-left: 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 20rem);
+    gap: 2rem;
 }
