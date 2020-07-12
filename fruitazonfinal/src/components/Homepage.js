@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../App.css";
+import ProductPage from "./widgets/ProductCard";
 
 class Homepage extends Component {
   render() {
@@ -9,6 +9,7 @@ class Homepage extends Component {
           <header>
             <h2>
               Fruitazon <span className="title-menu" />
+              <span class="ti-menu"></span>
             </h2>
             <nav>
               <form action="{value.toString()}" className="search">
@@ -36,7 +37,7 @@ class Homepage extends Component {
               </div>
               <div className="carousell-img">
                 <img
-                  src="assets/images/banner-1.png"
+                  src={require("../assets/images/banner-1.png")}
                   alt=""
                   width={500}
                   height={300}
@@ -50,7 +51,12 @@ class Homepage extends Component {
                   <div className="container">
                     <h3>Addison Rae</h3>
                     <div className="carousell-img">
-                      <img src="/fruitazon" alt="" width={300} height={370} />
+                      <img
+                        src={require("../assets/images/person-1.jpg")}
+                        alt=""
+                        width={300}
+                        height={370}
+                      />
                     </div>
                     <p>
                       "Fruitazon merupakan salah satu tempat terfavorit aku
@@ -64,7 +70,7 @@ class Homepage extends Component {
                     <h3>Jordan Tucker</h3>
                     <div className="carousell-img">
                       <img
-                        src="assets/images/person-2.jpg"
+                        src={require("../assets/images/person-2.jpg")}
                         alt=""
                         width={300}
                         height={370}
@@ -81,7 +87,7 @@ class Homepage extends Component {
                     <h3>Kendall Jenner</h3>
                     <div className="carousell-img">
                       <img
-                        src="/fruitazonfinal/public/assets/person-3.jpg"
+                        src={require("../assets/images/person-3.jpg")}
                         alt=""
                         width={300}
                         height={370}
@@ -114,6 +120,7 @@ class Homepage extends Component {
             </div>
           </section>
         </div>
+        <ProductPage />
       </div>
     );
   }
