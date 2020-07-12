@@ -120,7 +120,12 @@ class Homepage extends Component {
             </div>
           </section>
         </div>
-        <ProductPage />
+        <div className="popular">
+          <h2> Popular Products</h2>
+          <div className="popular-carousel">
+            <ProductPage />
+          </div>
+        </div>
       </div>
     );
   }
