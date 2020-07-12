@@ -8,12 +8,12 @@ class ProductPage extends Component {
           <div
             className="img"
             style={{
-              backgroundImage: `url(${require("../../assets/images/buah-jambu1.png")})`,
+              backgroundImage: `url(${require(`../../assets/images/${this.props.image}`)})`,
             }}
           />
           <div className="info">
-            <h3>Jambu</h3>
-            <p>This is a description for the item</p>
+            <h3>{this.props.name}</h3>
+            <p>This is the Product description</p>
             <div className="item-flex">
               <div className="rating">
                 <span className="ti-star" />
@@ -23,7 +23,7 @@ class ProductPage extends Component {
                 <span className="ti-star" />
               </div>
               <div className="price">
-                <h4>Rp7.000</h4>
+                <h4>{this.props.price}</h4>
               </div>
             </div>
           </div>
