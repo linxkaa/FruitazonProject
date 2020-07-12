@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProductPage from "./widgets/ProductCard";
+import Footer from "./widgets/Footer";
 
 class Homepage extends Component {
   render() {
@@ -121,11 +122,18 @@ class Homepage extends Component {
           </section>
         </div>
         <div className="popular">
-          <h2> Popular Products</h2>
+          <h2> Produk Kami</h2>
           <div className="popular-carousel">
-            <ProductPage />
+            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
+            <ProductPage name="Pisang" price="Rp5.000" image="pisang.jpg" />
+            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
+            <ProductPage name="Pisang" price="Rp5.000" image="pisang.jpg" />
+            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
+            <ProductPage name="Pisang" price="Rp5.000" image="pisang.jpg" />
+            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
