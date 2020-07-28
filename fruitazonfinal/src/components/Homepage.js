@@ -1,138 +1,311 @@
 import React, { Component } from "react";
-import ProductPage from "./widgets/ProductCard";
+import Navbar from "./widgets/Navbar";
 import Footer from "./widgets/Footer";
+import Header from "./widgets/Header";
 
 class Homepage extends Component {
   render() {
     return (
       <div>
-        <div>
-          <header>
-            <h2>
-              Fruitazon <span className="title-menu" />
-              <span class="ti-menu"></span>
-            </h2>
-            <nav>
-              <form action="{value.toString()}" className="search">
-                <input type="search" placeholder="Search item..." />
-                <button>
-                  <span className="span ti-search" />
-                </button>
-              </form>
-              <a href="#">Cart</a>
-              <a href="#">Sign up / Login</a>
-            </nav>
-          </header>
-          <section id="caroussel" data-flickity='{ "wrapAround": true }'>
-            <div className="carousell-item crsl">
-              <div className="carousell-info">
-                <h1>Apa itu Fruitazon?</h1>
-                <p>
-                  Fruitazon adalah E-commerce yang bergerak dibidang
-                  agricultural. Fruitazon menyediakan produk buah dan sayur
-                  tersegar yang siap diantarkan kerumah anda dalam hari yang
-                  sama. Garansi 100% uang kembali jika buah yang diterima dalam
-                  keadaan tidak baik. Yuk, tunggu apa lagi? Join Fruitazon
-                  sekarang untuk membeli produknya.
-                </p>
-              </div>
-              <div className="carousell-img">
-                <img
-                  src={require("../assets/images/banner-1.png")}
-                  alt=""
-                  width={500}
-                  height={300}
-                />
-              </div>
-            </div>
-            <div className="carousell-item">
-              <h1 className="card-info">Apa kata mereka?</h1>
-              <div className="card-carousell">
-                <div className="card">
-                  <div className="container">
-                    <h3>Addison Rae</h3>
-                    <div className="carousell-img">
-                      <img
-                        src={require("../assets/images/person-1.jpg")}
-                        alt=""
-                        width={300}
-                        height={370}
-                      />
-                    </div>
-                    <p>
-                      "Fruitazon merupakan salah satu tempat terfavorit aku
-                      untuk beli buah! Pengantarannya sangat cepat, dan adminnya
-                      responsive."
-                    </p>
-                  </div>
+        <Navbar />
+        <Header />
+        <section className="featured spad">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="section-title">
+                  <h2>Our Product</h2>
                 </div>
-                <div className="card">
-                  <div className="container">
-                    <h3>Jordan Tucker</h3>
-                    <div className="carousell-img">
-                      <img
-                        src={require("../assets/images/person-2.jpg")}
-                        alt=""
-                        width={300}
-                        height={370}
-                      />
-                    </div>
-                    <p>
-                      "Fruitazon terbaik! Buah dan sayur yang gue beli disini
-                      gapernah mengecewakan, selalu segar dan enak!"
-                    </p>
-                  </div>
-                </div>
-                <div className="card">
-                  <div className="container">
-                    <h3>Kendall Jenner</h3>
-                    <div className="carousell-img">
-                      <img
-                        src={require("../assets/images/person-3.jpg")}
-                        alt=""
-                        width={300}
-                        height={370}
-                      />
-                    </div>
-                    <p>
-                      "Sejauh ini Fruitazon emang gaada tandingan, awalnya ragu
-                      karna jaraknya jauh banget dari rumah aku. tapi ternyata
-                      pas dateng bener-bener puas!"
-                    </p>
-                  </div>
+                <div className="featured__controls">
+                  <ul>
+                    <li className="active" data-filter="*">
+                      All
+                    </li>
+                    <li data-filter=".oranges">Oranges</li>
+                    <li data-filter=".fresh-meat">Fresh Meat</li>
+                    <li data-filter=".vegetables">Vegetables</li>
+                    <li data-filter=".fastfood">Fastfood</li>
+                  </ul>
                 </div>
               </div>
             </div>
-            <div className="carousell-item crsl">
-              <div className="sistematika-carousell">
-                <h1>Sistematika Pemesanan</h1>
-                <p>
-                  Fruitazon adalah E-commerce yang bergerak dibidang
-                  agricultural. Fruitazon menyediakan produk buah dan sayur
-                  tersegar yang siap diantarkan kerumah anda dalam hari yang
-                  sama. Garansi 100% uang kembali jika buah yang diterima dalam
-                  keadaan tidak baik. Yuk, tunggu apa lagi? Join Fruitazon
-                  sekarang untuk membeli produknya.
-                </p>
+            <div className="row featured__filter text-center ">
+              <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat ">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-1.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
               </div>
-              <div className="carousell-img">
-                <img src="" alt="" width={500} height={300} />
+              <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-2.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-3.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-4.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-5.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-6.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-7.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+                <div className="featured__item">
+                  <div className="featured__item__pic set-bg">
+                    <img
+                      src={require("../assets/img/featured/feature-8.jpg")}
+                      alt=""
+                      className="test_img"
+                    />
+                    <ul className="featured__item__pic__hover">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-heart" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-retweet" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-shopping-cart" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured__item__text">
+                    <h6>
+                      <a href="#">Crab Pool Security</a>
+                    </h6>
+                    <h5>$30.00</h5>
+                  </div>
+                </div>
               </div>
             </div>
-          </section>
-        </div>
-        <div className="popular">
-          <h2> Produk Kami</h2>
-          <div className="popular-carousel">
-            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
-            <ProductPage name="Pisang" price="Rp5.000" image="pisang.jpg" />
-            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
-            <ProductPage name="Pisang" price="Rp5.000" image="pisang.jpg" />
-            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
-            <ProductPage name="Pisang" price="Rp5.000" image="pisang.jpg" />
-            <ProductPage name="Jambu" price="Rp3.000" image="buah-jambu1.png" />
           </div>
-        </div>
+        </section>
+
         <Footer />
       </div>
     );
