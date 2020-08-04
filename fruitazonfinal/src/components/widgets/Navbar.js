@@ -41,9 +41,8 @@ class Navbar extends Component {
                 <li>
                   <Link to="/shop">Shop</Link>
                 </li>
-
                 <li>
-                  <a href="./blog.html">About</a>
+                  <Link to="/about">About</Link>
                 </li>
                 <li>
                   <Link to="/contact">Contact</Link>
@@ -97,7 +96,7 @@ class Navbar extends Component {
                     </li>
 
                     <li>
-                      <a href="./blog.html">About</a>
+                      <a href="/about">About</a>
                     </li>
                     <li>
                       <Link to="/contact">Contact</Link>
