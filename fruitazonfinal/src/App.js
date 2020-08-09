@@ -8,6 +8,7 @@ import Homepage from "./Pages/Homepage";
 import Shop from "./Pages/Shop";
 import Contact from "./Pages/Contact";
 import About from "./Pages/About";
+import DetailProduct from "./Pages/DetailProduct";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path="/shop" component={Shop} />
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={About} />
+          <Route path="/detailproduct/:id" component={DetailProduct} />
         </Switch>
       </div>
     );

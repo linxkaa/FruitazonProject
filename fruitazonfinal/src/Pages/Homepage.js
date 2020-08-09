@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import data from "../assets/js/data";
+import { Link } from "react-router-dom";
 
 class Homepage extends Component {
   render() {
@@ -51,9 +52,7 @@ class Homepage extends Component {
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <i className="fa fa-shopping-cart" />
-                            </a>
+                              <Link to={'/detailproduct/' + product._id}><i className="fa fa-shopping-cart"/></Link>
                           </li>
                         </ul>
                       </div>
