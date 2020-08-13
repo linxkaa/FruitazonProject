@@ -2,12 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import ProductProvider from "./context/product";
+import CartProvider from "./context/cart";
+
+// import { ProductProvider } from "./context/product";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <ProductProvider>
+    <CartProvider>
+      <Router>
+        <App />
+      </Router>
+    </CartProvider>
+  </ProductProvider>,
+
   document.getElementById("root")
 );
 

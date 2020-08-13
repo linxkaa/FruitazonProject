@@ -145,7 +145,7 @@ ol {
 }
 
 .spad {
-    padding-top: 100px;
+    // padding-top: 100px;
     padding-bottom: 100px;
 }
 
@@ -166,10 +166,11 @@ ol {
 /* buttons */
 
 .primary-btn {
+    cursor: pointer;
     display: inline-block;
     font-size: 14px;
     padding: 10px 28px 10px;
-    color: $white-color;
+    color: $white-color !important;
     text-transform: uppercase;
     font-weight: 700;
     background: $primary-color;
@@ -184,6 +185,17 @@ ol {
     display: inline-block;
     padding: 13px 30px 12px;
     background: $primary-color;
+    border: none;
+}
+
+.site-btn-2 {
+    font-size: 14px;
+    color: $white-color;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 13px 30px 12px;
+    background: $para-color;
     border: none;
 }
 

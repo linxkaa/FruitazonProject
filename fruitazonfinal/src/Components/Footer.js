@@ -12,7 +12,7 @@ class Footer extends Component {
                   <div className="footer__about__logo align-items-center">
                     <a href="#">
                       <img
-                        src={require("../../assets/img/Fruitazon.png")}
+                        src={require("../assets/img/Fruitazon.png")}
                         width="100"
                         height="100"
                       />
@@ -71,16 +71,9 @@ class Footer extends Component {
               </div>
               <div className="col-lg-4 col-md-12">
                 <div className="footer__widget">
-                  <h6>Join Our Newsletter Now</h6>
-                  <p>
-                    Get E-mail updates about our latest shop and special offers.
-                  </p>
-                  <form action="#">
-                    <input type="text" placeholder="Enter your mail" />
-                    <button type="submit" className="site-btn">
-                      Subscribe
-                    </button>
-                  </form>
+                  <h6>Find us at our social media</h6>
+                  <p>Get to know us better</p>
+
                   <div className="footer__widget__social">
                     <a href="#">
                       <i className="fa fa-facebook" />
