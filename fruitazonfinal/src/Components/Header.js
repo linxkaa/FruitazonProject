@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   render() {
@@ -34,9 +35,9 @@ class Header extends Component {
                     100% Organic
                   </h2>
                   <p>Free Pickup and Delivery Available</p>
-                  <a href="#" className="primary-btn">
+                  <Link to="/shop" className="primary-btn">
                     SHOP NOW
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

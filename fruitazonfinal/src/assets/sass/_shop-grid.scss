@@ -1,8 +1,9 @@
 /*---------------------
   Shop Grid
 -----------------------*/
+
 .product {
-    padding-top: 80px;
+    // padding-top: 80px;
     padding-bottom: 80px;
 }
 
@@ -13,10 +14,8 @@
 .product__discount__title {
     text-align: left;
     margin-bottom: 65px;
-
     h2 {
         display: inline-block;
-
         &:after {
             margin: 0;
             width: 100%;
@@ -25,11 +24,8 @@
 }
 
 .product__discount__item {
-
     &:hover {
-
         .product__discount__item__pic {
-
             .product__item__pic__hover {
                 bottom: 20px;
             }
@@ -41,7 +37,6 @@
     height: 270px;
     position: relative;
     overflow: hidden;
-
     .product__discount__percent {
         height: 45px;
         width: 45px;
@@ -63,30 +58,24 @@
     bottom: -50px;
     width: 100%;
     text-align: center;
-    @include transition(all, .5s);
-
+    @include transition(all, 0.5s);
     li {
         list-style: none;
         display: inline-block;
         margin-right: 6px;
-
         &:last-child {
             margin-right: 0;
         }
-
         &:hover {
-
             a {
                 background: $primary-color;
                 border-color: $primary-color;
-
                 i {
                     color: $white-color;
                     transform: rotate(360deg);
                 }
             }
         }
-
         a {
             font-size: 16px;
             color: $normal-color;
@@ -98,12 +87,11 @@
             background: $white-color;
             display: block;
             border-radius: 50%;
-            @include transition(all, .5s);
-
+            @include transition(all, 0.5s);
             i {
                 position: relative;
                 transform: rotate(0);
-                @include transition(all, .3s);
+                @include transition(all, 0.3s);
             }
         }
     }
@@ -112,27 +100,22 @@
 .product__discount__item__text {
     text-align: center;
     padding-top: 20px;
-
     span {
         font-size: 14px;
         color: #b2b2b2;
         display: block;
         margin-bottom: 4px;
     }
-
     h5 {
         margin-bottom: 6px;
-
         a {
             color: $normal-color;
         }
     }
-
     .product__item__price {
         font-size: 18px;
         color: $normal-color;
         font-weight: 700;
-
         span {
             display: inline-block;
             font-weight: 400;
@@ -143,29 +126,23 @@
 }
 
 .product__discount__slider {
-
     .col-lg-4 {
         max-width: 100%;
     }
-
     &.owl-carousel {
-
         .owl-dots {
             text-align: center;
             margin-top: 30px;
-
             button {
                 height: 12px;
                 width: 12px;
                 border: 1px solid #b2b2b2;
                 border-radius: 50%;
                 margin-right: 12px;
-
                 &.active {
                     background: #707070;
                     border-color: $para-color;
                 }
-
                 &:last-child {
                     margin-right: 0;
                 }
@@ -182,13 +159,11 @@
 
 .filter__sort {
     margin-bottom: 15px;
-
     span {
         font-size: 16px;
         color: $para-color;
         display: inline-block;
     }
-
     .nice-select {
         background-color: #fff;
         border-radius: 0;
@@ -203,11 +178,9 @@
         color: $normal-color;
         font-weight: 700;
         cursor: pointer;
-
         span {
             color: $normal-color;
         }
-
         &:after {
             border-bottom: 1.5px solid #1c1c1c;
             border-right: 1.5px solid #1c1c1c;
@@ -218,7 +191,6 @@
             top: -5px;
         }
     }
-
     .nice-select.open .list {
         opacity: 1;
         pointer-events: auto;
@@ -226,13 +198,11 @@
         -ms-transform: scale(1) translateY(0);
         transform: scale(1) translateY(0);
     }
-
     .nice-select .list {
         border-radius: 0;
         margin-top: 0;
         top: 15px;
     }
-
     .nice-select .option {
         line-height: 30px;
         min-height: 30px;
@@ -242,11 +212,9 @@
 .filter__found {
     text-align: center;
     margin-bottom: 15px;
-
     h6 {
         font-size: 16px;
         color: #b2b2b2;
-
         span {
             color: $normal-color;
             font-weight: 700;
@@ -258,18 +226,15 @@
 .filter__option {
     text-align: right;
     margin-bottom: 15px;
-
     span {
         font-size: 24px;
         color: #b2b2b2;
         margin-right: 10px;
         cursor: pointer;
-        @include transition(all, .3s);
-
+        @include transition(all, 0.3s);
         &:last-child {
             margin: 0;
         }
-
         &:hover {
             color: $primary-color;
         }
@@ -278,11 +243,8 @@
 
 .product__item {
     margin-bottom: 50px;
-
     &:hover {
-
         .product__item__pic {
-
             .product__item__pic__hover {
                 bottom: 20px;
             }
@@ -302,30 +264,24 @@
     bottom: -50px;
     width: 100%;
     text-align: center;
-    @include transition(all, .5s);
-
+    @include transition(all, 0.5s);
     li {
         list-style: none;
         display: inline-block;
         margin-right: 6px;
-
         &:last-child {
             margin-right: 0;
         }
-
         &:hover {
-
             a {
                 background: $primary-color;
                 border-color: $primary-color;
-
                 i {
                     color: $white-color;
                     transform: rotate(360deg);
                 }
             }
         }
-
         a {
             font-size: 16px;
             color: $normal-color;
@@ -337,12 +293,11 @@
             background: $white-color;
             display: block;
             border-radius: 50%;
-            @include transition(all, .5s);
-
+            @include transition(all, 0.5s);
             i {
                 position: relative;
                 transform: rotate(0);
-                @include transition(all, .3s);
+                @include transition(all, 0.3s);
             }
         }
     }
@@ -351,15 +306,12 @@
 .product__item__text {
     text-align: center;
     padding-top: 15px;
-
     h6 {
         margin-bottom: 10px;
-
         a {
             color: $heading-color-2;
         }
     }
-
     h5 {
         color: $heading-color-2;
         font-weight: 700;
@@ -368,7 +320,6 @@
 
 .product__pagination {
     padding-top: 10px;
-
     a {
         display: inline-block;
         width: 30px;
@@ -380,14 +331,12 @@
         line-height: 28px;
         text-align: center;
         margin-right: 16px;
-        @include transition(all, .3s);
-
+        @include transition(all, 0.3s);
         &:hover {
             background: $primary-color;
             border-color: $primary-color;
             color: $white-color;
         }
-
         &:last-child {
             margin-right: 0;
         }
