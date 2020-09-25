@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
-
+import React, { useEffect, useState } from "react";
+import url from "../utils/Url";
+import axios from "axios";
 import { ProductContext } from "../context/product";
 import ProductCard from "../Pages/ProductCard";
 
 export default function Featured() {
-  const { products } = React.useContext(ProductContext);
+  const { products, data } = React.useContext(ProductContext);
 
   return (
     <>
@@ -18,8 +19,8 @@ export default function Featured() {
             </div>
           </div>
           <div className="row featured__filter text-center ">
-            {products.map((item) => {
-              if (item.featured === true)
+            {data.map((item) => {
+              if (item.featured == true)
                 return <ProductCard key={item.id} {...item} product={item} />;
             })}
           </div>

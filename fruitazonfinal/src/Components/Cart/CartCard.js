@@ -6,7 +6,8 @@ export default function CartCard({ id, image, title, price, amount }) {
   const { removeItem, increaseAmount, decreaseAmount } = useContext(
     CartContext
   );
-
+  console.log(image);
+  console.log(id);
   return (
     <>
       <tr>
@@ -57,7 +58,7 @@ export default function CartCard({ id, image, title, price, amount }) {
           </BtnUpDown>
         </td>
         <td className="align-middle">
-          <a href="#" className="text-dark">
+          <a className="text-dark">
             <i
               className="fa fa-trash"
               onClick={() => {
