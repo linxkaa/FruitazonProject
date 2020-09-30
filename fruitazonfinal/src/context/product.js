@@ -13,11 +13,8 @@ export default function ProductProvider({ children }) {
   useEffect(() => {
     setLoading(true);
     axios.get(`${url}`).then((response) => {
-      // const [data, setData] = useState(response.data.return)
       setProducts(response.data.return);
       setData(response.data.return);
-      console.log(setData);
-      // console.log(response.data);
       setLoading(false);
     });
     return () => {};

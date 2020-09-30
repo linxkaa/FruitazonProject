@@ -10,6 +10,8 @@
 "use strict";
 
 (function ($) {
+  console.log("ini dari main js");
+
   /*------------------
         Preloader
     --------------------*/
