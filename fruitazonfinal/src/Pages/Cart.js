@@ -12,10 +12,6 @@ const cookies = new Cookies();
 // import { UserContext } from "../context/user";
 
 class CartPage extends Component {
-  // function numberWithDot(x) {
-  //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  // }
-
   // const [cartData, setcartData] = useState([]);
 
   // let user = false;
@@ -28,11 +24,11 @@ class CartPage extends Component {
   state = {
     cartData: [],
     user: false,
+    total: 0,
   };
 
   componentWillMount() {
     var cookieCartlist = cookies.get("cart_list");
-    console.log(`${cookieCartlist} INI DI`);
 
     axios
       .post("http://localhost:3002/products/cart", {
@@ -45,9 +41,13 @@ class CartPage extends Component {
         // console.log(response.data.return);
       });
 
-    console.log(`${this.state.cartData} ini state`);
+    // var total = this.state.cartData.map((e) => e.price);
+    // console.log(total);
   }
 
+  numberWithDot = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   clearAllCart = () => {
     var self = this;
     cookies.remove("cart_list", { path: "/" });
@@ -60,8 +60,6 @@ class CartPage extends Component {
   };
 
   countAmount = (id) => {
-    var self = this;
-
     var result = {};
     var count = 0;
     var arrayKeys = [];
@@ -70,6 +68,13 @@ class CartPage extends Component {
     [...cookieCartlist].forEach((x) => (result[x] = (result[x] || 0) + 1));
     arrayKeys = Object.keys(result);
     count = arrayKeys.find((e) => parseInt(e) == id);
+    // var array = this.state.cartData.map((e) => e.price);
+    // total += parseInt(result[`${id}`]) * array[id - 1];
+    // console.log(total);
+    // self.setState({
+    //   total: this.state.total + total,
+    // });
+    // self.setState({});
     if (count == id) {
       return result[`${id}`];
     }
@@ -79,15 +84,10 @@ class CartPage extends Component {
     var cookieCartlist = cookies.get("cart_list");
 
     var filteredAry = [...cookieCartlist].filter((e) => e !== id);
-    // cookieCartlist = cookies.get("cart_list");
-
-    // cookies.remove("cart_list", { path: "/" });
-    // cookieCartlist = cookies.get("cart_list");
 
     cookies.set("cart_list", filteredAry, { path: "/" });
     cookieCartlist = cookies.get("cart_list");
 
-    console.log(`${cookieCartlist} INI SETELAH DI SET`);
     axios
       .post("http://localhost:3002/products/cart", {
         product_ids: cookieCartlist,
@@ -100,7 +100,27 @@ class CartPage extends Component {
       });
   };
 
+  totalValue = () => {
+    var cookieCartlist = cookies.get("cart_list");
+    var totalValue = 0;
+    var result = {};
+    var total = [];
+    if (this.state.cartData !== undefined) {
+      total = this.state.cartData.map((e) => e.price);
+
+      [...cookieCartlist].forEach((x) => (result[x] = (result[x] || 0) + 1));
+      var resultArr = Object.entries(result);
+
+      for (var i = 0; i < total.length; i++) {
+        totalValue += total[i] * parseInt(resultArr[i][1]);
+      }
+
+      return totalValue;
+    }
+  };
+
   render() {
+    console.log(this.totalValue());
     if (this.state.cartData === undefined) {
       return <EmptyCart />;
     } else if (this.state.cartData.length === 0) {
@@ -140,7 +160,7 @@ class CartPage extends Component {
                               <th scope="row">
                                 <div className="p-2">
                                   <img
-                                    src={item.image}
+                                    src={item.img}
                                     width={70}
                                     height={70}
                                     alt=""
@@ -150,7 +170,7 @@ class CartPage extends Component {
                                     <h5 className="mb-0">
                                       {" "}
                                       <a
-                                        href="#"
+                                        href
                                         className="text-dark d-inline-block align-middle"
                                       >
                                         {item.title}
@@ -189,7 +209,7 @@ class CartPage extends Component {
                                 </button>
                               </td>
                               <td className="align-middle">
-                                <a className="text-dark">
+                                <a className="text-dark" href>
                                   <i
                                     className="fa fa-trash"
                                     onClick={() => {
@@ -249,7 +269,9 @@ class CartPage extends Component {
                     <ul className="list-unstyled mb-4">
                       <li className="d-flex justify-content-between py-3 border-bottom">
                         <strong className="text-muted">Order Subtotal </strong>
-                        <strong>{`Rp$}`}</strong>
+                        <strong>{`Rp${this.numberWithDot(
+                          this.totalValue()
+                        )}`}</strong>
                         {/* {numberWithDot(total) */}
                       </li>
 
@@ -259,8 +281,9 @@ class CartPage extends Component {
                       </li>
                       <li className="d-flex justify-content-between py-3 border-bottom">
                         <strong className="text-muted">Total</strong>
-                        <h5 className="font-weight-bold">{`Rp$`}</h5>
-                        {/* {numberWithDot(total)} */}
+                        <h5 className="font-weight-bold">{`Rp${this.numberWithDot(
+                          this.totalValue()
+                        )}`}</h5>
                       </li>
                     </ul>
                     {this.state.user ? (

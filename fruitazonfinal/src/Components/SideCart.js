@@ -10,16 +10,16 @@ export default function SideCart() {
           id="cartModal"
           tabIndex={-1}
           role="dialog"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="exampleModalScrollableTitle"
           aria-hidden="true"
         >
           <div
-            className="modal-dialog modal-lg modal-dialog-centered"
+            className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
             role="document"
           >
             <div className="modal-content">
               <div className="modal-header border-bottom-0">
-                <h5 className="modal-title" id="exampleModalLabel">
+                <h5 className="modal-title" id="exampleModalScrollableTitle">
                   Your Shopping Cart
                 </h5>
                 <button

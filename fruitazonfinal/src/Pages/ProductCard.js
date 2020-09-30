@@ -45,11 +45,6 @@ const ProductCard = ({ product }) => {
           />
           <ul className="featured__item__pic__hover">
             <li>
-              <a href="#">
-                <i className="fa fa-heart" />
-              </a>
-            </li>
-            <li>
               <Link to={`/product/${product.id}`}>
                 <i className="fa fa-search" />
               </Link>

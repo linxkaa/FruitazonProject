@@ -11,10 +11,9 @@ import Contact from "./Pages/Contact";
 import About from "./Pages/About";
 import SingleProductPage from "./Pages/SingleProductPage";
 import LoginRegister from "./Components/LoginRegister";
+import InvoicePages from "./Pages/InvoicePages";
 
 import CartPage from "./Pages/Cart";
-import $ from "jquery";
-
 class App extends Component {
   render() {
     return (
@@ -26,6 +25,8 @@ class App extends Component {
         <SideCart />
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={Shop} />
+        <Route path="/invoice" component={InvoicePages} />
+
         <Route path="/contact" component={Contact} />
         <Route path="/about" component={About} />
         <Route path="/product/:id" component={SingleProductPage} />
