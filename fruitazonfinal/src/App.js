@@ -13,22 +13,23 @@ import SingleProductPage from "./Pages/SingleProductPage";
 import LoginRegister from "./Components/LoginRegister";
 
 import CartPage from "./Pages/Cart";
+import $ from "jquery";
 
 class App extends Component {
   render() {
     return (
       <>
         <Navbar />
+
+        <Route path="/login" component={LoginRegister} />
+
         <SideCart />
-        <LoginRegister />
-        <Switch>
-          <Route exact path="/" exact component={Homepage} />
-          <Route path="/shop" exact component={Shop} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/about" component={About} />
-          <Route path="/product/:id" component={SingleProductPage} />
-          <Route path="/cart" component={CartPage} />
-        </Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route path="/shop" component={Shop} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/about" component={About} />
+        <Route path="/product/:id" component={SingleProductPage} />
+        <Route path="/cart" component={CartPage} />
         <Footer />
       </>
     );

@@ -1,11 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { linkData as links } from "../context/LinkData";
 import { CartContext } from "../context/cart";
 
-export default function Navbar() {
-  const { cart } = useContext(CartContext);
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
+export default function Navbar() {
+  const [cookiesCart, setcookiesCart] = useState([]);
+  useEffect(() => {
+    var cookieCartlist = cookies.get("cart_list");
+
+    setcookiesCart(cookieCartlist);
+
+    return () => {};
+  }, []);
+
+  console.log(cookiesCart);
+  const { cart } = useContext(CartContext);
   return (
     <header>
       <div className="humberger__menu__overlay" />
@@ -74,7 +86,7 @@ export default function Navbar() {
                   src={require("../assets/img/Fruitazon.png")}
                   width="50"
                   length="50"
-                  alt
+                  alt=""
                 />
               </a>
             </div>
@@ -107,12 +119,12 @@ export default function Navbar() {
                       data-toggle="modal"
                       data-target="#cartModal"
                     />
-                    <span>{cart.length}</span>
+                    <span>{cookiesCart.length}</span>
                   </Link>
                 </li>
               </ul>
               <div className="header__top__right__auth">
-                <Link data-toggle="modal" data-target="#modalLoginRegister">
+                <Link to="/login">
                   <i className="fa fa-user" /> Login
                 </Link>
               </div>
