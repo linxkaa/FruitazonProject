@@ -1,16 +1,27 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
 import { linkData as links } from "../context/LinkData";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class Navbar extends Component {
-  state = {
-    cartData: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: false,
+    };
+  }
+
   componentWillMount() {
     var cookieCartlist = cookies.get("cart_list");
+    let jwtToken = cookies.get("jwtToken");
 
+    if (jwtToken != undefined) {
+      this.setState({
+        login: true,
+      });
+    }
     this.setState({ cartData: cookieCartlist });
   }
 
@@ -111,14 +122,20 @@ class Navbar extends Component {
                         data-toggle="modal"
                         data-target="#cartModal"
                       />
-                      <span>{this.state.cartData.length}</span>
+                      <span>{this.state.cartData?.length ?? 0}</span>
                     </Link>
                   </li>
                 </ul>
                 <div className="header__top__right__auth">
-                  <Link to="/login">
-                    <i className="fa fa-user" /> Login
-                  </Link>
+                  {this.state.login ? (
+                    <Link to="/profile">
+                      <i className="fa fa-user" /> Profile
+                    </Link>
+                  ) : (
+                    <Link to="/login">
+                      <i className="fa fa-user" /> Login
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
