@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 
 export default function Contact() {
   return (
@@ -19,7 +18,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
       <section className="contact spad">
         <div className="container">
           <div className="row">

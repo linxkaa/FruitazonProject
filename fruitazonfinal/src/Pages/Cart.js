@@ -23,13 +23,18 @@ class CartPage extends Component {
 
   state = {
     cartData: [],
+    productQty: [],
     user: false,
-    total: 0,
   };
 
   componentWillMount() {
-    var cookieCartlist = cookies.get("cart_list");
-
+    var cookieCartlist = cookies.get(["cart_list"]);
+    var token = cookies.get(["jwtToken"]);
+    if (token !== undefined) {
+      this.setState({
+        user: true,
+      });
+    }
     axios
       .post("http://localhost:3002/products/cart", {
         product_ids: cookieCartlist,
@@ -40,7 +45,7 @@ class CartPage extends Component {
 
         // console.log(response.data.return);
       });
-
+    this.idQtyObject();
     // var total = this.state.cartData.map((e) => e.price);
     // console.log(total);
   }
@@ -59,25 +64,81 @@ class CartPage extends Component {
     });
   };
 
-  countAmount = (id) => {
+  idQtyObject = () => {
     var result = {};
-    var count = 0;
-    var arrayKeys = [];
     var cookieCartlist = cookies.get("cart_list");
 
     [...cookieCartlist].forEach((x) => (result[x] = (result[x] || 0) + 1));
-    arrayKeys = Object.keys(result);
-    count = arrayKeys.find((e) => parseInt(e) == id);
-    // var array = this.state.cartData.map((e) => e.price);
-    // total += parseInt(result[`${id}`]) * array[id - 1];
-    // console.log(total);
-    // self.setState({
-    //   total: this.state.total + total,
-    // });
-    // self.setState({});
-    if (count == id) {
-      return result[`${id}`];
+    var test = Object.entries(result).map((item) => ({
+      id: parseInt(item[0]),
+      qty: item[1],
+    }));
+    var joined = this.state.productQty.concat(test);
+    console.log(joined);
+    this.setState({
+      productQty: joined,
+    });
+  };
+
+  countAmount = (id) => {
+    var amount = 0;
+    for (var i = 0; i < this.state.productQty.length; i++) {
+      if (this.state.productQty[i].id == id) {
+        amount = this.state.productQty[i].qty;
+      }
     }
+    return amount;
+  };
+
+  increaseItem = (id) => {
+    const elementsIndex = this.state.productQty.findIndex(
+      (element) => element.id == id
+    );
+    let newArray = [...this.state.productQty];
+
+    newArray[elementsIndex] = {
+      ...newArray[elementsIndex],
+      qty: newArray[elementsIndex].qty + 1,
+    };
+    var cookieCartlist = cookies.get("cart_list");
+    cookieCartlist.push(id);
+    cookies.set("cart_list", cookieCartlist, { path: "/" });
+
+    console.log(cookieCartlist);
+    this.setState({
+      productQty: newArray,
+    });
+  };
+  removeElement = (array, elem) => {
+    var index = array.indexOf(elem);
+    if (index > -1) {
+      array.splice(index, 1);
+    }
+  };
+
+  decreaseItem = (id) => {
+    const elementsIndex = this.state.productQty.findIndex(
+      (element) => element.id == id
+    );
+    let newArray = [...this.state.productQty];
+
+    newArray[elementsIndex] = {
+      ...newArray[elementsIndex],
+      qty: newArray[elementsIndex].qty - 1,
+    };
+    var cookieCartlist = cookies.get("cart_list");
+    this.removeElement(cookieCartlist, id);
+    cookies.set("cart_list", cookieCartlist, { path: "/" });
+    if (cookieCartlist.length == 0) {
+      cookies.set("cart_list", [], { path: "/" });
+      this.clearAllCart();
+    } else if (!cookieCartlist.includes(id)) {
+      this.removedItem(id);
+    }
+    console.log(cookieCartlist);
+    this.setState({
+      productQty: newArray,
+    });
   };
 
   removedItem = (id) => {
@@ -107,20 +168,19 @@ class CartPage extends Component {
     var total = [];
     if (this.state.cartData !== undefined) {
       total = this.state.cartData.map((e) => e.price);
-
       [...cookieCartlist].forEach((x) => (result[x] = (result[x] || 0) + 1));
       var resultArr = Object.entries(result);
-
       for (var i = 0; i < total.length; i++) {
-        totalValue += total[i] * parseInt(resultArr[i][1]);
+        if (resultArr[i] !== undefined) {
+          totalValue += total[i] * parseInt(resultArr[i][1]);
+        }
       }
-
       return totalValue;
     }
   };
 
   render() {
-    console.log(this.totalValue());
+    // console.log(this.totalValue());
     if (this.state.cartData === undefined) {
       return <EmptyCart />;
     } else if (this.state.cartData.length === 0) {
@@ -190,7 +250,8 @@ class CartPage extends Component {
                                   type="button"
                                   className="cart-btn amount-btn"
                                   onClick={() => {
-                                    // increaseAmount(id);
+                                    // console.log(this.state.productQty[1].id);
+                                    this.increaseItem(item.id);
                                   }}
                                 >
                                   <FaAngleUp />
@@ -203,6 +264,7 @@ class CartPage extends Component {
                                   className="cart-btn amount-btn"
                                   onClick={() => {
                                     // decreaseAmount(id, amount);
+                                    this.decreaseItem(item.id);
                                   }}
                                 >
                                   <FaAngleDown />
@@ -288,7 +350,7 @@ class CartPage extends Component {
                     </ul>
                     {this.state.user ? (
                       <Link
-                        to="/checkout"
+                        to="/invoice"
                         href="#"
                         className="primary-btn rounded-pill py-2 btn-block text-center"
                       >

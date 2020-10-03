@@ -6,18 +6,6 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const ProductCard = ({ product }) => {
-  // const { addToCart } = React.useContext(CartContext);
-  // const cart = useCallback((id) => {
-  //   var cookieCartlist = cookies.get("cart-list");
-  //   if (cookieCartlist == undefined) {
-  //     cookies.set("cart_list", [id], { path: "/" });
-  //   }
-  //   cookieCartlist = cookies.get("cart-list");
-
-  //   console.log(cookieCartlist);
-  //   return null;
-  // }, []);
-
   function cart(id) {
     var cookieCartlist = cookies.get("cart_list");
     if (cookieCartlist == undefined) {

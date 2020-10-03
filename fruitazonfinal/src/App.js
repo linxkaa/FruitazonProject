@@ -14,6 +14,8 @@ import LoginRegister from "./Components/LoginRegister";
 import InvoicePages from "./Pages/InvoicePages";
 
 import CartPage from "./Pages/Cart";
+import ProfilePage from "./Pages/Profile";
+import RegisterPage from "./Pages/RegisterPage";
 class App extends Component {
   render() {
     return (
@@ -26,6 +28,8 @@ class App extends Component {
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={Shop} />
         <Route path="/invoice" component={InvoicePages} />
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/register" component={RegisterPage} />
 
         <Route path="/contact" component={Contact} />
         <Route path="/about" component={About} />
