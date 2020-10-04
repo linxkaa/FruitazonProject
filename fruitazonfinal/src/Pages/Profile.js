@@ -47,6 +47,7 @@ class ProfilePage extends Component {
     this.setState({
       user: false,
     });
+    this.props.handlerLogout();
   };
 
   render() {

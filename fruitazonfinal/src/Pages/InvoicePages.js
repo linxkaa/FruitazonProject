@@ -1,17 +1,54 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 const cookies = new Cookies();
 
 class InvoicePages extends Component {
   state = {
-    data: [],
+    cartData: [],
     loading: false,
   };
+  numberWithDot = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   componentWillMount() {
+    var cookieCartlist = cookies.get(["cart_list"]);
+
+    axios
+      .post("http://localhost:3002/products/cart", {
+        product_ids: cookieCartlist,
+      })
+      .then((response) => {
+        // cartData = response.data.return;
+        this.setState({ cartData: response.data.return });
+
+        // console.log(response.data.return);
+      });
     this.authLogin();
   }
+
+  countAmount = (id) => {
+    var result = {};
+    var count = 0;
+    var arrayKeys = [];
+    var cookieCartlist = cookies.get("cart_list");
+
+    [...cookieCartlist].forEach((x) => (result[x] = (result[x] || 0) + 1));
+    arrayKeys = Object.keys(result);
+    count = arrayKeys.find((e) => parseInt(e) == id);
+    // var array = this.state.cartData.map((e) => e.price);
+    // total += parseInt(result[`${id}`]) * array[id - 1];
+    // console.log(total);
+    // self.setState({
+    //   total: this.state.total + total,
+    // });
+    // self.setState({});
+    if (count == id) {
+      return result[`${id}`];
+    }
+  };
 
   authLogin() {
     let jwtToken = cookies.get("jwtToken");
@@ -25,7 +62,7 @@ class InvoicePages extends Component {
 
   render() {
     if (this.state.loading == false) {
-      return <Redirect to="/login"></Redirect>;
+      return <Redirect to="/login" />;
     } else {
       return (
         <>
@@ -59,24 +96,27 @@ class InvoicePages extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>Samsung Galaxy S5</td>
-                              <td className="text-center">$900</td>
-                              <td className="text-center">1</td>
-                              <td className="text-right">$900</td>
-                            </tr>
-                            <tr>
-                              <td>Samsung Galaxy S5 Extra Battery</td>
-                              <td className="text-center">$30.00</td>
-                              <td className="text-center">1</td>
-                              <td className="text-right">$30.00</td>
-                            </tr>
-                            <tr>
-                              <td>Screen protector</td>
-                              <td className="text-center">$7</td>
-                              <td className="text-center">4</td>
-                              <td className="text-right">$28</td>
-                            </tr>
+                            {this.state.cartData.map((item) => {
+                              return (
+                                <tr>
+                                  <td>{item.title}</td>
+                                  <td className="text-center">
+                                    Rp{this.numberWithDot(item.price)}
+                                  </td>
+                                  <td className="text-center">
+                                    {" "}
+                                    {this.countAmount(item.id)}
+                                  </td>
+                                  <td className="text-right">
+                                    Rp
+                                    {this.numberWithDot(
+                                      item.price * this.countAmount(item.id)
+                                    )}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+
                             <tr>
                               <td className="highrow" />
                               <td className="highrow" />

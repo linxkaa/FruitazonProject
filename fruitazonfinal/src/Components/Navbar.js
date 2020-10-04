@@ -22,6 +22,7 @@ class Navbar extends Component {
         login: true,
       });
     }
+    console.log(this.props.loggedIn);
     this.setState({ cartData: cookieCartlist });
   }
 
@@ -127,7 +128,7 @@ class Navbar extends Component {
                   </li>
                 </ul>
                 <div className="header__top__right__auth">
-                  {this.state.login ? (
+                  {this.props.loggedIn ? (
                     <Link to="/profile">
                       <i className="fa fa-user" /> Profile
                     </Link>
