@@ -42,13 +42,13 @@ class LoginRegister extends Component {
           self.setState({
             login: true,
           });
+          this.props.handlerLogin();
         } else {
           self.setState({
             login: false,
             errorMsg: response.data.msg,
           });
         }
-        console.log(response.data.msg);
       })
       .catch(function (err) {
         console.log(err);
