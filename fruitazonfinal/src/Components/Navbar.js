@@ -8,14 +8,8 @@ const cookies = new Cookies();
 class Navbar extends Component {
 
   componentWillMount() {
-    var self = this;
     var cookieCartlist = cookies.get("cart_list");
-    let jwtToken = cookies.get("jwtToken");
 
-    if (jwtToken != undefined) {
-      self.props.handlerLogin();
-    }
-    
     this.setState({ cartData: cookieCartlist });
   }
 
