@@ -8,16 +8,14 @@ const cookies = new Cookies();
 class LoginRegister extends Component {
   state = {
     data: [],
-    login: false,
     errorMsg: "",
   };
   componentWillMount() {
+    var self = this;
     let jwtToken = cookies.get("jwtToken");
 
     if (jwtToken != undefined) {
-      this.setState({
-        login: true,
-      });
+      self.props.handler();
     }
   }
 
@@ -25,7 +23,7 @@ class LoginRegister extends Component {
     event.preventDefault();
   };
 
-  post(refs) {
+  post = async (refs) => {
     var self = this;
 
     axios
@@ -42,7 +40,9 @@ class LoginRegister extends Component {
           self.setState({
             login: true,
           });
-          this.props.handlerLogin();
+
+          console.log('handler kepanggil');
+          self.props.handlerLogin();
         } else {
           self.setState({
             login: false,

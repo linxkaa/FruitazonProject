@@ -42,12 +42,13 @@ class ProfilePage extends Component {
     }
   }
   logout = () => {
+    var self = this;
     cookies.remove(["jwtToken"]);
 
     this.setState({
       user: false,
     });
-    this.props.handlerLogout();
+    self.props.handlerLogout();
   };
 
   render() {

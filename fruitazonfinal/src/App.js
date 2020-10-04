@@ -16,15 +16,29 @@ import InvoicePages from "./Pages/InvoicePages";
 import CartPage from "./Pages/Cart";
 import ProfilePage from "./Pages/Profile";
 import RegisterPage from "./Pages/RegisterPage";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 class App extends Component {
   state = {
     loggedIn: false,
   };
 
   constructor(props) {
-    super(props);
-    this.handlerLogout = this.handler.bind(this);
-    this.handlerLogin = this.handler.bind(this);
+    super(props)
+
+    this.handlerLogin = this.handlerLogin.bind(this);
+    this.handlerLogout = this.handlerLogout.bind(this);
+  }
+
+  componentWillMount() {
+    let jwtToken = cookies.get("jwtToken");
+
+    if (jwtToken != undefined) {
+      this.setState({
+        loggedIn: true,
+      });
+    }
   }
 
   handlerLogout() {
@@ -35,31 +49,22 @@ class App extends Component {
 
   handlerLogin() {
     this.setState({
-      loggedIn: true,
-    });
+      loggedIn: true
+    })
   }
 
   renderContent() {}
   render() {
     return (
       <>
-        <Navbar loggedIn={this.state.loggedIn} />
-
-        <Route
-          path="/login"
-          component={LoginRegister}
-          handlerLogin={this.handlerLogin}
-        />
+        <Navbar loggedIn={this.state.loggedIn} handlerLogin = {this.handlerLogin} />
+        <Route path="/login" render={()=><LoginRegister handlerLogin = {this.handlerLogin}/>}/>
 
         <SideCart />
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={Shop} />
         <Route path="/invoice" component={InvoicePages} />
-        <Route
-          path="/profile"
-          component={ProfilePage}
-          handlerLogout={this.handlerLogout}
-        />
+        <Route path="/profile" render={()=><ProfilePage handlerLogout={this.handlerLogout}/>}/>
         <Route path="/register" component={RegisterPage} />
 
         <Route path="/contact" component={Contact} />

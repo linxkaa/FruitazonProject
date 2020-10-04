@@ -6,23 +6,16 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      login: false,
-    };
-  }
 
   componentWillMount() {
+    var self = this;
     var cookieCartlist = cookies.get("cart_list");
     let jwtToken = cookies.get("jwtToken");
 
     if (jwtToken != undefined) {
-      this.setState({
-        login: true,
-      });
+      self.props.handlerLogin();
     }
-    console.log(this.props.loggedIn);
+    
     this.setState({ cartData: cookieCartlist });
   }
 
