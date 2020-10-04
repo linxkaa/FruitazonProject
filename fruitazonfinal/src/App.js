@@ -57,7 +57,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Navbar loggedIn={this.state.loggedIn} handlerLogin = {this.handlerLogin} />
+        <Navbar loggedIn={this.state.loggedIn} />
         <Route path="/login" render={()=><LoginRegister handlerLogin = {this.handlerLogin}/>}/>
 
         <SideCart />
