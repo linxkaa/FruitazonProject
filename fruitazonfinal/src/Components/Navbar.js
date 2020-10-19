@@ -6,7 +6,6 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class Navbar extends Component {
-
   componentWillMount() {
     var cookieCartlist = cookies.get("cart_list");
 

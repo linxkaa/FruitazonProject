@@ -30,15 +30,15 @@ class Shop extends Component {
         this.setState({ error: true, loading: false, errorMsg: err.message });
       });
   };
-  filteredProductByCat = (name) => {
+  filteredProductByCat = (id) => {
     axios
-      .get(`http://localhost:3002/products/filteredbycat?search=${name}`)
+      .post(`http://localhost:3002/products/filteredbycat`, {
+        id: id,
+      })
       .then((response) => {
         this.setState({ products: response.data.return, loading: false });
       })
       .catch(function (err) {
-        console.log(err);
-
         this.setState({ error: true, loading: false, merrorMsg: err.message });
       });
   };
@@ -112,18 +112,14 @@ class Shop extends Component {
                         <li>
                           <button
                             className="pb-3"
-                            onClick={() =>
-                              this.filteredProductByCat("vegetables")
-                            }
+                            onClick={() => this.filteredProductByCat(1)}
                           >
                             Vegetables
                           </button>
                         </li>
 
                         <li>
-                          <button
-                            onClick={() => this.filteredProductByCat("fruits")}
-                          >
+                          <button onClick={() => this.filteredProductByCat(2)}>
                             Fresh Fruits
                           </button>
                         </li>
@@ -135,7 +131,12 @@ class Shop extends Component {
                   <div class="row">
                     {this.state.products.map((item) => {
                       return (
-                        <ProductCard key={item.id} {...item} product={item} />
+                        <ProductCard
+                          key={item.id}
+                          {...item}
+                          product={item}
+                          cartData={this.props.handlerCartData}
+                        />
                       );
                     })}
                   </div>

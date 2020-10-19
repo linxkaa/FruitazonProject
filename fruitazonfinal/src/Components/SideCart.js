@@ -1,7 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Cookies from "universal-cookie";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+const cookies = new Cookies();
 
 export default function SideCart() {
+  const [cart, setCart] = useState([]);
+  const [productQty, setProductQty] = useState([]);
+
+  function countAmount(id) {
+    var amount = 0;
+    for (var i = 0; i < productQty.length; i++) {
+      if (productQty[i].id == id) {
+        amount = productQty[i].qty;
+      }
+    }
+    return amount;
+  }
+
+  function idQtyObject() {
+    var result = {};
+    var cookieCartlist = cookies.get("cart_list");
+
+    [...cookieCartlist].forEach((x) => (result[x] = (result[x] || 0) + 1));
+    var test = Object.entries(result).map((item) => ({
+      id: parseInt(item[0]),
+      qty: item[1],
+    }));
+    var joined = productQty.concat(test);
+    setProductQty(joined);
+  }
+  useEffect(() => {
+    var cookieCartlist = cookies.get(["cart_list"]);
+    var token = cookies.get(["jwtToken"]);
+    if (token !== undefined) {
+      // this.setState({
+      //   user: true,
+      // });
+    }
+    if (cookieCartlist.length !== 0) {
+      axios
+        .post("http://localhost:3002/products/cart", {
+          product_ids: cookieCartlist,
+        })
+        .then((response) => {
+          setCart(response.data.return);
+          // console.log(response.data.return);
+        });
+    }
+    idQtyObject();
+  }, []);
+
   return (
     <CartWrapper>
       <div>
@@ -39,48 +90,39 @@ export default function SideCart() {
                       <th scope="col">Product</th>
 
                       <th scope="col">Qty</th>
-                      <th scope="col">Total</th>
-                      <th scope="col">Actions</th>
+                      <th scope="col">Item Price</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="w-25">
-                        <img
-                          src="https://ecs7.tokopedia.net/img/cache/700/product-1/2019/12/2/80540977/80540977_27566c81-1ec0-417d-ae94-3f71d18731f8_1024_1024"
-                          className="img-fluid img-thumbnail"
-                          alt="Sheep"
-                        />
-                      </td>
-                      <td>Pisang Cavendish</td>
+                    {cart.map((item) => {
+                      return (
+                        <tr>
+                          <td className="w-25">
+                            <img
+                              src={item.img}
+                              className="img-fluid img-thumbnail"
+                              alt="Sheep"
+                            />
+                          </td>
+                          <td>{item.title}</td>
 
-                      <td className="qty">2</td>
-                      <td>Rp30.000</td>
-                      <td>
-                        <a href="#" className="btn btn-danger btn-sm">
-                          <i className="fa fa-times" />
-                        </a>
-                      </td>
-                    </tr>
+                          <td className="qty">{countAmount(item.id)}</td>
+                          <td>Rp{item.price}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
-                <div className="d-flex justify-content-end">
-                  <h5>
-                    Total: <span className="price text-success">Rp30.000</span>
-                  </h5>
-                </div>
               </div>
               <div className="modal-footer border-top-0 d-flex justify-content-between">
-                <button
-                  type="button"
-                  className="site-btn-2"
-                  data-dismiss="modal"
+                <Link
+                  to="/cart"
+                  // type="button"
+                  className="site-btn"
+                  // data-dismiss="modal"
                 >
                   Open Cart
-                </button>
-                <button type="button" className="site-btn">
-                  Checkout
-                </button>
+                </Link>
               </div>
             </div>
           </div>
