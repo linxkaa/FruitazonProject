@@ -12,11 +12,12 @@ function validateEmail(mail) {
     )
   ) {
     return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
-export default class RegisterPage extends Component {
+export default class EditProfilePage extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -34,29 +35,36 @@ export default class RegisterPage extends Component {
         login: true,
       });
     }
-    console.log(jwtToken);
   }
 
   post(refs) {
     var self = this;
+    var cookiesUseriD = cookies.get("userId");
 
     axios
-      .post("http://localhost:3002/user/register", {
-        username: refs.username.value,
-        password: refs.password.value,
+      .post("http://localhost:3002/user/editprofile", {
+        username: cookiesUseriD.username,
+        password: cookiesUseriD.password,
+        id: cookiesUseriD.id,
         name: refs.name.value,
         address: refs.address.value,
         email: refs.email.value,
       })
       .then(function (response) {
         console.log(response.data);
-        if (response.data.errorCode == "OK") {
+        if (response.data.errorCode == null) {
           self.setState({
             validate: true,
           });
+
+          cookies.remove("jwtToken", { path: "/" });
+          cookies.set("jwtToken", response.data.token, { path: "/" });
+          var jwtToken = cookies.get("jwtToken");
+
+          console.log(jwtToken);
         } else {
           self.setState({
-            validateError: response.data.msg,
+            validateError: response.data.message,
           });
         }
       })
@@ -66,8 +74,8 @@ export default class RegisterPage extends Component {
   }
   render() {
     if (this.state.validate) {
-      return <Redirect to="/login" />;
-    } else if (!this.state.login) {
+      return <Redirect to="/profile" />;
+    } else if (this.state.login) {
       return (
         <>
           <div className="limiter">
@@ -76,7 +84,7 @@ export default class RegisterPage extends Component {
                 <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
                   <div className="login100-form validate-form flex-sb flex-w">
                     <span className="login100-form-title p-b-32">
-                      Register Account
+                      Edit Profile
                     </span>
                     {/* name */}
                     <span className="p-b-11">Name</span>
@@ -89,32 +97,7 @@ export default class RegisterPage extends Component {
                       />
                       <span className="focus-input100" />
                     </div>
-                    {/* username */}
-                    <span className="p-b-11">Username</span>
-                    <div className="wrap-input100 validate-input m-b-12">
-                      <input
-                        required
-                        className="input100"
-                        type="text"
-                        ref="username"
-                      />
-                      <span className="focus-input100" />
-                    </div>
-                    {/* pwd */}
 
-                    <span className=" p-b-11">Password</span>
-                    <div className="wrap-input100 validate-input m-b-12">
-                      <span className="btn-show-pass">
-                        <i className="fa fa-eye" />
-                      </span>
-                      <input
-                        required
-                        className="input100"
-                        type="password"
-                        ref="password"
-                      />
-                      <span className="focus-input100" />
-                    </div>
                     {/* address */}
 
                     <span className=" p-b-11">Address</span>
@@ -148,12 +131,7 @@ export default class RegisterPage extends Component {
                     <div className="container-login100-form-btn mt-3">
                       <button
                         onClick={() => {
-                          if (this.refs.password.value.length < 6) {
-                            this.setState({
-                              validateError:
-                                "Password is less than 6 character",
-                            });
-                          } else if (!validateEmail(this.refs.email.value)) {
+                          if (!validateEmail(this.refs.email.value)) {
                             this.setState({
                               validateError:
                                 "Invalid Email (Didn't contains domain)",
@@ -165,17 +143,15 @@ export default class RegisterPage extends Component {
                           }
                           if (
                             this.refs.name.value.length !== 0 &&
-                            this.refs.username.value.length !== 0 &&
                             validateEmail(this.refs.email.value) &&
-                            this.refs.address.value.length !== 0 &&
-                            this.refs.password.value.length !== 0
+                            this.refs.address.value.length !== 0
                           ) {
                             this.post(this.refs);
                           }
                         }}
                         className="login100-form-btn"
                       >
-                        Register
+                        Edit Profile
                       </button>
                     </div>
                   </div>
@@ -184,14 +160,6 @@ export default class RegisterPage extends Component {
                     <br />
                   </div>
                   <div className="errorMsg">{this.state.validateError}</div>
-
-                  <div>
-                    Already have account?
-                    <Link to="/login" className="login-hover">
-                      {" "}
-                      Login here
-                    </Link>
-                  </div>
                 </div>
               </div>
             </form>
@@ -199,7 +167,7 @@ export default class RegisterPage extends Component {
         </>
       );
     } else {
-      return <Redirect to="/cart" />;
+      return <Redirect to="/login" />;
     }
   }
 }

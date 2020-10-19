@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 
 import Cookies from "universal-cookie";
@@ -20,6 +20,9 @@ class ProfilePage extends Component {
   componentWillMount() {
     var self = this;
     var token = cookies.get(["jwtToken"]);
+    var cookiesPwd = cookies.get("password");
+    console.log(cookiesPwd.password);
+    console.log(token);
     if (token !== undefined) {
       self.setState({
         user: true,
@@ -29,12 +32,23 @@ class ProfilePage extends Component {
           token: token,
         })
         .then(function (response) {
-          console.log(response);
+          console.log(response.data.return.name);
+          console.log(cookiesPwd.password);
+
           self.setState({
             name: response.data.return.name,
             address: response.data.return.address,
             email: response.data.return.email,
           });
+          cookies.set(
+            "userId",
+            {
+              id: response.data.return.user_id,
+              username: response.data.return.username,
+              password: cookiesPwd.password,
+            },
+            { path: "/" }
+          );
         })
         .catch(function (err) {
           console.log(err);
@@ -44,7 +58,8 @@ class ProfilePage extends Component {
   logout = () => {
     var self = this;
     cookies.remove(["jwtToken"]);
-
+    cookies.remove("userId");
+    cookies.remove("password");
     this.setState({
       user: false,
     });
@@ -59,13 +74,21 @@ class ProfilePage extends Component {
         <div>
           <div className="card text-center">
             <div className="card-body">
-              <h5 className="card-title py-5">
-                Selamat Datang, {this.state.name}!
-              </h5>
+              <h5 className="card-title py-5">Welcome, {this.state.name}!</h5>
               <p className="card-text py-5">
-                Berikut adalah data diri kamu -- <br /> Email:{" "}
-                {this.state.email} <br /> Alamat: {this.state.address}
+                Here's your data profile -- <br /> Email: {this.state.email}{" "}
+                <br /> Address: {this.state.address}
               </p>
+              <Link to="/editprofile" className="login-hover">
+                {" "}
+                Edit Profile
+              </Link>
+              <div className="py-1">
+                <Link to="/confirm" className="login-hover">
+                  {" "}
+                  See purchase history
+                </Link>
+              </div>
               <div className="py-5">
                 <button
                   type="button"

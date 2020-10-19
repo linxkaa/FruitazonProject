@@ -15,7 +15,7 @@ class LoginRegister extends Component {
     let jwtToken = cookies.get("jwtToken");
 
     if (jwtToken != undefined) {
-      self.props.handler();
+      self.props.handlerLogin();
     }
   }
 
@@ -25,7 +25,13 @@ class LoginRegister extends Component {
 
   post = async (refs) => {
     var self = this;
-
+    cookies.set(
+      "password",
+      {
+        password: refs.password.value,
+      },
+      { path: "/" }
+    );
     axios
       .post("http://localhost:3002/user/login", {
         username: refs.username.value,
@@ -40,9 +46,28 @@ class LoginRegister extends Component {
           self.setState({
             login: true,
           });
-
-          console.log('handler kepanggil');
           self.props.handlerLogin();
+          var cookiesPwd = cookies.get("password");
+
+          axios
+            .post("http://localhost:3002/user/userdata", {
+              token: response.data.token,
+            })
+            .then(function (responsee) {
+              cookies.set(
+                "userId",
+                {
+                  id: responsee.data.return.user_id,
+                  username: responsee.data.return.username,
+                  password: cookiesPwd.password,
+                },
+                { path: "/" }
+              );
+            })
+
+            .catch(function (err) {
+              console.log(err);
+            });
         } else {
           self.setState({
             login: false,
@@ -53,7 +78,7 @@ class LoginRegister extends Component {
       .catch(function (err) {
         console.log(err);
       });
-  }
+  };
   render() {
     if (this.state.login) {
       return <Redirect to="/cart" />;

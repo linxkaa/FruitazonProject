@@ -21,10 +21,7 @@ class InvoicePages extends Component {
         product_ids: cookieCartlist,
       })
       .then((response) => {
-        // cartData = response.data.return;
         this.setState({ cartData: response.data.return });
-
-        // console.log(response.data.return);
       });
     this.authLogin();
   }
@@ -38,13 +35,7 @@ class InvoicePages extends Component {
     [...cookieCartlist].forEach((x) => (result[x] = (result[x] || 0) + 1));
     arrayKeys = Object.keys(result);
     count = arrayKeys.find((e) => parseInt(e) == id);
-    // var array = this.state.cartData.map((e) => e.price);
-    // total += parseInt(result[`${id}`]) * array[id - 1];
-    // console.log(total);
-    // self.setState({
-    //   total: this.state.total + total,
-    // });
-    // self.setState({});
+
     if (count == id) {
       return result[`${id}`];
     }

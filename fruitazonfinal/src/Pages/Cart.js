@@ -35,20 +35,46 @@ class CartPage extends Component {
         user: true,
       });
     }
-    axios
-      .post("http://localhost:3002/products/cart", {
-        product_ids: cookieCartlist,
-      })
-      .then((response) => {
-        // cartData = response.data.return;
-        this.setState({ cartData: response.data.return });
+    if (cookieCartlist.length !== 0) {
+      axios
+        .post("http://localhost:3002/products/cart", {
+          product_ids: cookieCartlist,
+        })
+        .then((response) => {
+          // cartData = response.data.return;
+          this.setState({ cartData: response.data.return });
 
-        // console.log(response.data.return);
-      });
+          // console.log(response.data.return);
+        });
+    }
+
     this.idQtyObject();
     // var total = this.state.cartData.map((e) => e.price);
     // console.log(total);
   }
+
+  invoice = () => {
+    var cookieCartlist = cookies.get(["cart_list"]);
+    var cookiesUserId = cookies.get("userId");
+    console.log(cookiesUserId.id);
+    if (cookieCartlist.length !== 0) {
+      axios
+        .post("http://localhost:3002/products/invoice", {
+          product_ids: cookieCartlist,
+          qty: this.state.productQty,
+          message: "test",
+          user_id: cookiesUserId.id,
+        })
+        .then((response) => {
+          // cartData = response.data.return;
+          console.log(response.data);
+          // console.log(response.data.return);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   numberWithDot = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -350,9 +376,13 @@ class CartPage extends Component {
                     </ul>
                     {this.state.user ? (
                       <Link
-                        to="/invoice"
-                        href="#"
+                        to="/confirm"
                         className="primary-btn rounded-pill py-2 btn-block text-center"
+                        onClick={() => {
+                          this.invoice();
+                          cookies.remove("cart_list", { path: "/" });
+                          cookies.set("cart_list", [], { path: "/" });
+                        }}
                       >
                         Procceed to checkout
                       </Link>
