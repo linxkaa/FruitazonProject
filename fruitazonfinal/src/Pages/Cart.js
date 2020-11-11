@@ -56,7 +56,7 @@ class CartPage extends Component {
   invoice = () => {
     var cookieCartlist = cookies.get(["cart_list"]);
     var cookiesUserId = cookies.get("userId");
-    console.log(cookiesUserId.id);
+    // console.log(cookiesUserId.id);
     if (cookieCartlist.length !== 0) {
       axios
         .post("http://localhost:3002/products/invoice", {
@@ -380,6 +380,8 @@ class CartPage extends Component {
                         className="primary-btn rounded-pill py-2 btn-block text-center"
                         onClick={() => {
                           this.invoice();
+                          this.props.handlerInvoiceData();
+
                           cookies.remove("cart_list", { path: "/" });
                           cookies.set("cart_list", [], { path: "/" });
                         }}

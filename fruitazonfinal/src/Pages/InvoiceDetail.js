@@ -36,17 +36,7 @@ class InvoiceDetail extends Component {
         status: 1,
       })
       .then(function (response) {
-        axios
-          .post("http://localhost:3002/products/invoicedetail", {
-            header_id: self.state.id,
-          })
-          .then((response) => {
-            // cartData = response.data.return;
-            if (response.data.success) {
-              self.setState({ invoiceData: response.data.return });
-            }
-          });
-        self.setState({ push: true });
+        self.props.handlerInvoiceData();
         console.log(response.data);
       })
       .catch(function (err) {

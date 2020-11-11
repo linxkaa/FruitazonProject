@@ -4,7 +4,7 @@ import axios from "axios";
 import { ProductContext } from "../context/product";
 import ProductCard from "../Pages/ProductCard";
 
-export default function Featured() {
+export default function Featured({ cartDataa }) {
   const { products, data } = React.useContext(ProductContext);
 
   return (
@@ -21,7 +21,14 @@ export default function Featured() {
           <div className="row featured__filter text-center ">
             {data.map((item) => {
               if (item.featured == true)
-                return <ProductCard key={item.id} {...item} product={item} />;
+                return (
+                  <ProductCard
+                    key={item.id}
+                    {...item}
+                    product={item}
+                    cartDataa={cartDataa}
+                  />
+                );
             })}
           </div>
         </div>

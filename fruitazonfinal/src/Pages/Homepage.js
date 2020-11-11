@@ -6,7 +6,7 @@ import Loading from "../Components/Loading";
 import loadjs from "loadjs";
 import ErrorPage from "../Components/Error";
 
-export default function Homepage() {
+export default function Homepage({ handlerCartData }) {
   const { loading, error, errorMsg } = React.useContext(ProductContext);
   // console.log(products);
   // console.log(loading);
@@ -29,7 +29,7 @@ export default function Homepage() {
     return (
       <div>
         <Header />
-        <Featured />
+        <Featured cartDataa={handlerCartData} />
       </div>
     );
   }

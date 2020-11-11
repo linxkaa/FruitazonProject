@@ -106,10 +106,10 @@ class Navbar extends Component {
                     <Link>
                       <i
                         className="fa fa-shopping-bag"
-                        data-toggle="modal"
-                        data-target="#cartModal"
+                        // data-toggle="modal"
+                        // data-target="#cartModal"
                       />
-                      <span>{this.state.cartData?.length ?? 0}</span>
+                      <span>{this.props.cartData?.length ?? 0}</span>
                     </Link>
                   </li>
                 </ul>

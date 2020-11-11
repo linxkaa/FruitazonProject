@@ -7,6 +7,7 @@ const cookies = new Cookies();
 
 class ProductCard extends Component {
   cart = (id) => {
+    var self = this;
     var cookieCartlist = cookies.get("cart_list");
     if (cookieCartlist == undefined) {
       cookies.set("cart_list", [id], { path: "/" });
@@ -15,8 +16,7 @@ class ProductCard extends Component {
       cookies.set("cart_list", cookieCartlist, { path: "/" });
     }
     cookieCartlist = cookies.get("cart_list");
-    // this.props.cartData(cookieCartlist);
-    console.log(cookieCartlist);
+    self.props.cartDataa();
     return null;
   };
 
