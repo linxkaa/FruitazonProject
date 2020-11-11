@@ -29,6 +29,7 @@ class Shop extends Component {
         console.log(err.message);
         this.setState({ error: true, loading: false, errorMsg: err.message });
       });
+    console.log(this.props.handlerCartData);
   };
   filteredProductByCat = (id) => {
     axios
@@ -135,7 +136,7 @@ class Shop extends Component {
                           key={item.id}
                           {...item}
                           product={item}
-                          cartData={this.props.handlerCartData}
+                          cartDataa={this.props.handlerCartData}
                         />
                       );
                     })}

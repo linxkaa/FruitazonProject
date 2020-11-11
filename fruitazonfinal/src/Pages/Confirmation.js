@@ -6,28 +6,23 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class InvoiceHeader extends Component {
-  state = {
-    invoiceData: [],
-  };
+  // state = {
+  //   invoiceData: [],
+  // };
 
-  componentWillMount() {
-    var cookiesUserid = cookies.get("userId");
-    console.log(cookiesUserid.id);
-    axios
-      .post("http://localhost:3002/products/invoicedata", {
-        user_id: cookiesUserid.id,
-      })
-      .then((response) => {
-        console.log(response.data.return);
-        // cartData = response.data.return;
-        this.setState({ invoiceData: response.data.return });
-      });
+  async componentDidMount() {
+    var self = this;
+
+    await self.props.handlerInvoiceData();
   }
 
   convertTime = (time) => {
     var d = new Date(time.toString());
-
-    return `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} -- ${d.getHours()}:${d.getMinutes()}`;
+    return `${d.getDate()}/${
+      parseInt(d.getMonth()) < 10 ? "0" + d.getMonth() : d.getMonth()
+    }/${d.getFullYear()} -- ${d.getHours()}:${
+      parseInt(d.getMinutes()) < 10 ? "0" + d.getMinutes() : d.getMinutes()
+    }`;
   };
   render() {
     return (
@@ -57,7 +52,7 @@ class InvoiceHeader extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.invoiceData.map((item) => {
+                      {this.props.invoiceData.map((item) => {
                         return (
                           <tr>
                             <th scope="row">
@@ -92,7 +87,6 @@ class InvoiceHeader extends Component {
                                 to={`/invoicedetail/${item.id}/${item.status_payment}`}
                                 type="button"
                                 className="primary-btn rounded-pill py-2 "
-                                // onClick={() => this.clearAllCart()}
                               >
                                 Detail
                               </Link>
